@@ -90,14 +90,12 @@ flowchart LR
     D --> A[analyze_phase_a.py<br/>Xabier]
     A --> Z[results: 9 configuraciones y gráficas]
 
-    classDef compartido fill:#e8ecf1,stroke:#4d5b6c,color:#17202c
     classDef alberto fill:#e3eef8,stroke:#0060aa,color:#17202c
     classDef xabier fill:#fbeedb,stroke:#b35c00,color:#17202c
-    class C,L,O,D,Z compartido
-    class R1,D1 alberto
-    class R2,D2,M,A xabier
+    class C,L,O,R1,D1 alberto
+    class R2,D2,M,D,A,Z xabier
 ```
-Azul: Alberto · Ámbar: Xabier · Gris: compartido
+Azul: Alberto · Ámbar: Xabier
 
 
 ## Entorno
