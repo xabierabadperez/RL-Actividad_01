@@ -36,7 +36,21 @@ Justificación:
 ## 9 configuraciones elegidas
 (pegar tabla de results/best_configs.md cuando estén los 9 estudios)
 
+## Pendiente para A.2 (Xabier)
+1. Clonar el repo, entrar en la rama de Alberto y crear el entorno (`pip install -r requirements.txt`).
+2. Revisar `Actividad_1/config.py` y confirmar los valores (o proponer cambios antes de lanzar nada).
+3. Comprobar que funciona: `cd Actividad_1` y `python lunar_common.py`.
+4. Crear `run_phase_a_2.py` copiando `run_phase_a_1.py`, con `OWNER = "2"` y estos estudios:
+   esarsa (low, medium, high) y qlearning (high).
+5. Ejecutar sus estudios (≈ 30 min) y subir `optuna/phase_a_2.db`.
+6. Escribir `merge_dbs.py` (une `phase_a_1.db` y `phase_a_2.db` en `phase_a.db`) y `analyze_phase_a.py`
+   (tabla de las 9 configuraciones y gráficas de Optuna).
+7. Informe: sección 3b, sus estudios en 3c/3d, análisis de Expected SARSA y su contribución.
+
+## Hecho por A.1 (Alberto)
+- `config.py`, `lunar_common.py`, `optuna_study.py` y `run_phase_a_1.py` escritos y probados.
+- Estudios de A.1: pendientes de lanzar.
+
 ## Decisiones pendientes o consultas al profesor
-- Confirmar que un grupo de dos personas es válido (el enunciado dice 3-4).
 - Decidir si se amplía el rango de `learning_rate` por encima de 0,5.
 - Comprobar los límites de observación con datos medidos (percentiles 1 y 99).
