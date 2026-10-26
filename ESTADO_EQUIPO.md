@@ -76,50 +76,29 @@ Bases de datos: `optuna/phase_a_1.db` (Alberto) y `optuna/phase_a_2.db` (Xabier)
 - [ ] Análisis: Expected SARSA y comparación global
 - [ ] Contribución individual
 
-## Cómo se reparte el trabajo y cómo fluye
+## Cómo se conectan los archivos
 ```mermaid
-flowchart TB
-    subgraph ALB["ALBERTO (A.1) · hecho"]
-        direction TB
-        C["<b>config.py</b><br/>valores compartidos:<br/>bins, rangos, pasos, semilla"]
-        L["<b>lunar_common.py</b><br/>crea LunarLander discretizado<br/>y entrena y evalúa un agente"]
-        O["<b>optuna_study.py</b><br/>un estudio de Optuna:<br/>30 trials de un algoritmo y presupuesto"]
-        R1["<b>run_phase_a_1.py</b><br/>lanza sus 5 estudios<br/>uno detrás de otro"]
-        D1[("<b>phase_a_1.db</b><br/>5 estudios · 150 trials")]
-        J1["<b>results/best_*.json</b><br/>mejor configuración de cada estudio"]
-        C -->|"aporta los valores"| L
-        L -->|"train_and_evaluate() devuelve el reward"| O
-        O -->|"un estudio por cada pareja algoritmo y presupuesto"| R1
-        R1 -->|"guarda todos los trials"| D1
-        R1 -->|"guarda el mejor de cada uno"| J1
-    end
+flowchart LR
+    C[config.py] --> L[lunar_common.py] --> O[optuna_study.py]
+    O --> R1[run_phase_a_1.py<br/>Alberto]
+    O --> R2[run_phase_a_2.py<br/>Xabier]
+    R1 --> D1[(phase_a_1.db)]
+    R2 --> D2[(phase_a_2.db)]
+    D1 --> M[merge_dbs.py<br/>Xabier]
+    D2 --> M
+    M --> D[(phase_a.db)]
+    D --> A[analyze_phase_a.py<br/>Xabier]
+    A --> Z[results: 9 configuraciones y gráficas]
 
-    subgraph XAB["XABIER (A.2) · pendiente"]
-        direction TB
-        R2["<b>run_phase_a_2.py</b><br/>lanza sus 4 estudios"]
-        D2[("<b>phase_a_2.db</b><br/>4 estudios · 120 trials")]
-        M["<b>merge_dbs.py</b><br/>junta las dos bases de datos"]
-        D[("<b>phase_a.db</b><br/>9 estudios · 270 trials<br/>(la que se entrega)")]
-        A["<b>analyze_phase_a.py</b><br/>elige la mejor de cada estudio<br/>y dibuja las gráficas"]
-        Z["<b>9 configuraciones + gráficas</b><br/>van al informe: 3c y 3d<br/>y son la entrada de la Fase B"]
-        R2 -->|"guarda sus trials"| D2
-        D2 -->|"se une con la de Alberto"| M
-        M --> D
-        D -->|"lee los 9 estudios"| A
-        A --> Z
-    end
-
-    O -. "Xabier reutiliza el mismo script" .-> R2
-    C -. "Xabier revisa y acepta los valores" .-> R2
-    D1 -. "Alberto le pasa su base de datos" .-> M
-
-    classDef hecho fill:#bcd9f2,stroke:#0060aa,stroke-width:2px,color:#101820
-    classDef pendiente fill:#f7d9ae,stroke:#b35c00,stroke-width:2px,stroke-dasharray:5 3,color:#101820
-    class C,L,O,R1,D1,J1 hecho
-    class R2,D2,M,D,A,Z pendiente
-    style ALB fill:#e3eef8,stroke:#0060aa,stroke-width:2px,color:#0a3d6b
-    style XAB fill:#fdf0dd,stroke:#b35c00,stroke-width:2px,color:#7a3f00
+    classDef compartido fill:#e8ecf1,stroke:#4d5b6c,color:#17202c
+    classDef alberto fill:#e3eef8,stroke:#0060aa,color:#17202c
+    classDef xabier fill:#fbeedb,stroke:#b35c00,color:#17202c
+    class C,L,O,D,Z compartido
+    class R1,D1 alberto
+    class R2,D2,M,A xabier
 ```
+Azul: Alberto · Ámbar: Xabier · Gris: compartido
+
 
 ## Entorno
 - Gymnasium versión: 1.3.0   Entorno: LunarLander-v3
