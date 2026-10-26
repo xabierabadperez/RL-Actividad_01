@@ -1,0 +1,13 @@
+{
+  "algo": "sarsa",
+  "budget": "medium",
+  "n_bins": 5,
+  "reward": 130.7353432814897,
+  "params": {
+    "learning_rate": 0.10234067558327423,
+    "learning_rate_decay": 0.88,
+    "lr_episodes_decay": 1000,
+    "discount_rate": 0.9500000000000001,
+    "epsilon": 0.0
+  }
+}
