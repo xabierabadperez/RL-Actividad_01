@@ -1,0 +1,13 @@
+{
+  "algo": "qlearning",
+  "budget": "medium",
+  "n_bins": 5,
+  "reward": 148.5482117741121,
+  "params": {
+    "learning_rate": 0.0805486410736318,
+    "learning_rate_decay": 0.98,
+    "lr_episodes_decay": 100,
+    "discount_rate": 0.96,
+    "epsilon": 0.0
+  }
+}
