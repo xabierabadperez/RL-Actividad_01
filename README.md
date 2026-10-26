@@ -3,7 +3,7 @@
 **Fase A:** optimización de hiperparámetros con Optuna para 3 algoritmos × 3 presupuestos de
 discretización, sobre `LunarLander-v3` (Gymnasium, Box2D), usando los `DiscretizationWrappers` de `deustorl/`.
 
-Equipo: Alberto (A.1), Xabier (A.2). Estado detallado en `ESTADO_EQUIPO.md`.
+Equipo: Alberto (A.1), Xabier (A.2). Reparto de tareas y estado: ver `ESTADO_EQUIPO.md`.
 
 ## Estructura
 ```
@@ -15,7 +15,7 @@ Actividad_1/
   run_phase_a_1.py  lanza los estudios de A.1 (Alberto)
   optuna/           bases de datos de Optuna
   results/          mejores configuraciones y gráficas
-ESTADO_EQUIPO.md    estado y decisiones del equipo
+ESTADO_EQUIPO.md    reparto de tareas y estado del equipo
 ```
 
 ## Instalación
@@ -45,12 +45,12 @@ Todo está en `Actividad_1/config.py`. Ambos miembros deben usar los mismos valo
 
 - 30 trials por estudio, 500.000 pasos por trial, 50 episodios de evaluación, semilla 47.
 - Hiperparámetros explorados: learning rate, decaimiento del lr, episodios de decaimiento, factor de descuento y epsilon (rangos en `SEARCH_SPACE`).
-  
+
 ### Justificación
 - **Bins (3/5/7):** ≈ 60× más estados en cada nivel; con 8 bins la tabla Q ocuparía ≈ 540 MB.
 - **30 trials:** el mínimo exigido es 20; TPE usa 10 trials aleatorios iniciales, así quedan 20 guiados.
 - **500.000 pasos:** ≈ 14 s por trial; los 9 estudios caben en ≈ 1 h.
-- **50 episodios de evaluación:** igual que en la evaluación final pedida por la actividad.
+- **50 episodios de evaluación:** igual que la evaluación final pedida por la actividad.
 - **Semilla 47:** la usada en `experiment_2.10.py`.
 - **Hiperparámetros:** los de `experiment_2.10.py`, con rangos adaptados a LunarLander.
 
@@ -69,10 +69,3 @@ python optuna_study.py --algo sarsa --budget low --owner 1
 ## Resultados
 - `optuna/phase_a_1.db`: un estudio por algoritmo y presupuesto (30 trials).
 - `results/best_<algoritmo>_<presupuesto>.json`: la mejor configuración de cada estudio.
-
-## Estado
-- [x] `config.py`, `lunar_common.py`, `optuna_study.py`, `run_phase_a_1.py`
-- [ ] Estudios de A.1 ejecutados
-- [ ] Estudios de A.2 (pendiente de definir)
-- [ ] Fusión de bases de datos y análisis
-- [ ] Informe de la Fase A
