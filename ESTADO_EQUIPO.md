@@ -4,14 +4,33 @@
 ## Equipo
 - Fase A: Alberto (A.1), Xabier (A.2)
 
-## Resumen de la Fase A
-| | A.1 Alberto | A.2 Xabier |
+## Qué pide la actividad en la Fase A
+Entrega: 3/11/2026 (extensión 9/11) · Valor total de la actividad: 15 %.
+La Fase A vale un 5 %: selección y justificación de los presupuestos de discretización, metodología con Optuna,
+calidad de los experimentos y análisis de los resultados.
+
+| Requisito del enunciado (sección 2, Fase A) | Cómo lo cumplimos | Quién |
 |---|---|---|
-| Estudios de Optuna | sarsa ×3, qlearning low y medium (5) | esarsa ×3, qlearning high (4) |
-| Base de datos | `optuna/phase_a_1.db` | `optuna/phase_a_2.db` |
-| Código | `config.py`, `lunar_common.py`, `optuna_study.py`, `run_phase_a_1.py` | `run_phase_a_2.py`, `merge_dbs.py`, `analyze_phase_a.py` |
-| Informe | 2 Entorno, 3a Discretización, 3c/3d de sus estudios | 3b Hiperparámetros, 3c/3d de sus estudios, tabla de las 9 configuraciones |
-| Análisis | Efecto de la discretización en SARSA y Q-Learning | Efecto en Expected SARSA y comparación global |
+| 1. Tres presupuestos de discretización con tamaños claramente distintos | 3 / 5 / 7 bins por dimensión → 6.561 / 390.625 / 5.764.801 estados (`config.py`) | Alberto |
+| 2. Scripts de Optuna similares a `experiment_2.10.py` para SARSA, Expected SARSA y Q-Learning con cada presupuesto (9 combinaciones) | `optuna_study.py` (un estudio por algoritmo y presupuesto) y `lunar_common.py` | Alberto |
+| 3. Al menos 180 combinaciones (20 por algoritmo y presupuesto) con el mismo presupuesto de entrenamiento | 30 trials × 9 estudios = 270, todos con 500.000 pasos | Alberto (5 estudios) y Xabier (4 estudios) |
+| 4. Mejor combinación por algoritmo y presupuesto → 9 configuraciones | `analyze_phase_a.py` extrae la mejor de cada estudio | Xabier |
+| 5. Analizar cómo afecta el presupuesto de discretización a cada algoritmo | Sección de análisis del informe | Alberto (SARSA y Q-Learning), Xabier (Expected SARSA y comparación global) |
+
+
+### Qué se entrega de la Fase A (sección 6 del enunciado)
+- [ ] Base de datos de Optuna: `optuna/phase_a.db` (fusión de las dos; la hace `merge_dbs.py`)
+- [ ] Scripts de Python utilizados
+- [ ] Informe en PDF con las secciones de la Fase A:
+
+| Sección del informe | Contenido | Quién |
+|---|---|---|
+| 2 Entorno seleccionado | Descripción y justificación de LunarLander | Alberto |
+| 3a Tamaños de discretización | Los tres niveles, tamaño de los espacios y justificación | Alberto |
+| 3b Hiperparámetros | Tabla de hiperparámetros explorados y rangos | Xabier |
+| 3c Resultados de Optuna | 3–5 gráficas más relevantes con su interpretación | Alberto y Xabier (cada uno las de sus estudios) |
+| 3d Mejores configuraciones | Tabla con las nueve configuraciones | Xabier (tabla de las 9) y Alberto (sus 5 filas) |
+| 5 Contribuciones individuales | 1–2 párrafos por persona | Cada uno el suyo |
 
 ## Los 9 estudios
 Cada estudio: 30 trials de 500.000 pasos. Estado: ⬜ pendiente · 🟨 en curso · ✅ hecho
@@ -22,20 +41,24 @@ Cada estudio: 30 trials de 500.000 pasos. Estado: ⬜ pendiente · 🟨 en curso
 | Expected SARSA | A.2 ⬜ | A.2 ⬜ | A.2 ⬜ |
 | Q-Learning | A.1 ⬜ | A.1 ⬜ | A.2 ⬜ |
 
+Bases de datos: `optuna/phase_a_1.db` (Alberto) y `optuna/phase_a_2.db` (Xabier).
+
 ## Tareas
 ### Entre los dos
 - [ ] Revisar y aceptar `config.py` (bins, límites, rangos, pasos, semilla)
 - [x] Repartir los 9 estudios
+- [ ] Confirmar con el profesor que un grupo de dos es válido (el enunciado dice 3-4)
 - [ ] Decidir si se amplía el rango de `learning_rate` (en pruebas llegó a 0,46 de un máximo de 0,5)
+- [ ] Comprobar los límites de observación con datos medidos (percentiles 1 y 99)
 - [ ] Intercambiar las bases de datos y fusionar las ramas
-- [ ] Revisión del código y del texto
+- [ ] Revisión cruzada del código y del texto
 
 ### A.1 Alberto
 - [x] `config.py`
 - [x] `lunar_common.py` (probado)
 - [x] `optuna_study.py` (probado con 2 trials)
 - [x] `run_phase_a_1.py`
-- [x] `requirements.txt`, `.gitignore`, `README.md`, este archivo (en curso)
+- [ ] `requirements.txt`, `.gitignore`, `README.md`, este archivo (en curso)
 - [ ] Ejecutar sus 5 estudios (≈ 35 min)
 - [ ] Informe: 2 Entorno y 3a Discretización
 - [ ] Informe: 3c y 3d de sus estudios
@@ -66,7 +89,15 @@ flowchart LR
     M --> D[(phase_a.db)]
     D --> A[analyze_phase_a.py<br/>Xabier]
     A --> Z[results: 9 configuraciones y gráficas]
+
+    classDef compartido fill:#e8ecf1,stroke:#4d5b6c,color:#17202c
+    classDef alberto fill:#e3eef8,stroke:#0060aa,color:#17202c
+    classDef xabier fill:#fbeedb,stroke:#b35c00,color:#17202c
+    class C,L,O,D,Z compartido
+    class R1,D1 alberto
+    class R2,D2,M,A xabier
 ```
+Azul: Alberto · Ámbar: Xabier · Gris: compartido
 
 ## Entorno
 - Gymnasium versión: 1.3.0   Entorno: LunarLander-v3
