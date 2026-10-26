@@ -47,7 +47,6 @@ Bases de datos: `optuna/phase_a_1.db` (Alberto) y `optuna/phase_a_2.db` (Xabier)
 ### Entre los dos
 - [ ] Revisar y aceptar `config.py` (bins, límites, rangos, pasos, semilla)
 - [x] Repartir los 9 estudios
-- [ ] Confirmar con el profesor que un grupo de dos es válido (el enunciado dice 3-4)
 - [ ] Decidir si se amplía el rango de `learning_rate` (en pruebas llegó a 0,46 de un máximo de 0,5)
 - [ ] Comprobar los límites de observación con datos medidos (percentiles 1 y 99)
 - [ ] Intercambiar las bases de datos y fusionar las ramas
@@ -58,8 +57,8 @@ Bases de datos: `optuna/phase_a_1.db` (Alberto) y `optuna/phase_a_2.db` (Xabier)
 - [x] `lunar_common.py` (probado)
 - [x] `optuna_study.py` (probado con 2 trials)
 - [x] `run_phase_a_1.py`
-- [ ] `requirements.txt`, `.gitignore`, `README.md`, este archivo (en curso)
-- [ ] Ejecutar sus 5 estudios (≈ 35 min)
+- [x] `requirements.txt`, `.gitignore`, `README.md`, este archivo (en curso)
+- [x] Ejecutar sus 5 estudios (≈ 35 min)
 - [ ] Informe: 2 Entorno y 3a Discretización
 - [ ] Informe: 3c y 3d de sus estudios
 - [ ] Análisis: discretización en SARSA y Q-Learning
