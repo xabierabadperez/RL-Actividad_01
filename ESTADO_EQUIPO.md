@@ -79,43 +79,18 @@ Bases de datos: `optuna/phase_a_1.db` (Alberto) y `optuna/phase_a_2.db` (Xabier)
 ## Cómo se conectan los archivos
 ```mermaid
 flowchart LR
-    subgraph COMP1[" Compartido "]
-        C[config.py] --> L[lunar_common.py] --> O[optuna_study.py]
-    end
-
-    subgraph ALB[" Alberto (A.1) "]
-        R1[run_phase_a_1.py] --> D1[(phase_a_1.db)]
-    end
-
-    subgraph XAB[" Xabier (A.2) "]
-        R2[run_phase_a_2.py] --> D2[(phase_a_2.db)]
-        M[merge_dbs.py]
-        A[analyze_phase_a.py]
-    end
-
-    subgraph COMP2[" Resultado conjunto "]
-        D[(phase_a.db)]
-        Z[results: 9 configuraciones y gráficas]
-    end
-
-    O --> R1
-    O --> R2
-    D1 --> M
+    C[config.py] --> L[lunar_common.py] --> O[optuna_study.py]
+    O --> R1[run_phase_a_1.py<br/>Alberto]
+    O --> R2[run_phase_a_2.py<br/>Xabier]
+    R1 --> D1[(phase_a_1.db)]
+    R2 --> D2[(phase_a_2.db)]
+    D1 --> M[merge_dbs.py<br/>Xabier]
     D2 --> M
-    M --> D --> A --> Z
-
-    classDef compartido fill:#d5dbe3,stroke:#4d5b6c,stroke-width:2px,color:#101820
-    classDef alberto fill:#bcd9f2,stroke:#0060aa,stroke-width:2px,color:#101820
-    classDef xabier fill:#f7d9ae,stroke:#b35c00,stroke-width:2px,color:#101820
-    class C,L,O,D,Z compartido
-    class R1,D1 alberto
-    class R2,D2,M,A xabier
-
-    style COMP1 fill:#eef1f5,stroke:#4d5b6c,stroke-width:2px,color:#101820
-    style ALB fill:#e3eef8,stroke:#0060aa,stroke-width:2px,color:#0a3d6b
-    style XAB fill:#fdf0dd,stroke:#b35c00,stroke-width:2px,color:#7a3f00
-    style COMP2 fill:#eef1f5,stroke:#4d5b6c,stroke-width:2px,color:#101820
+    M --> D[(phase_a.db)]
+    D --> A[analyze_phase_a.py<br/>Xabier]
+    A --> Z[results: 9 configuraciones y gráficas]
 ```
+
 
 ## Entorno
 - Gymnasium versión: 1.3.0   Entorno: LunarLander-v3
