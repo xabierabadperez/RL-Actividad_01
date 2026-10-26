@@ -76,21 +76,39 @@ Bases de datos: `optuna/phase_a_1.db` (Alberto) y `optuna/phase_a_2.db` (Xabier)
 - [ ] Análisis: Expected SARSA y comparación global
 - [ ] Contribución individual
 
-## Cómo se conectan los archivos
+## Cómo se reparte el trabajo
 ```mermaid
 flowchart LR
-    C[config.py] --> L[lunar_common.py] --> O[optuna_study.py]
-    O --> R1[run_phase_a_1.py<br/>Alberto]
-    O --> R2[run_phase_a_2.py<br/>Xabier]
-    R1 --> D1[(phase_a_1.db)]
-    R2 --> D2[(phase_a_2.db)]
-    D1 --> M[merge_dbs.py<br/>Xabier]
-    D2 --> M
-    M --> D[(phase_a.db)]
-    D --> A[analyze_phase_a.py<br/>Xabier]
-    A --> Z[results: 9 configuraciones y gráficas]
-```
+    subgraph ALB["ALBERTO (A.1) · hecho"]
+        direction TB
+        C[config.py]
+        L[lunar_common.py]
+        O[optuna_study.py]
+        R1[run_phase_a_1.py]
+        D1[(phase_a_1.db<br/>5 estudios · 150 trials)]
+        C --> L --> O --> R1 --> D1
+    end
 
+    subgraph XAB["XABIER (A.2) · pendiente"]
+        direction TB
+        R2[run_phase_a_2.py]
+        D2[(phase_a_2.db<br/>4 estudios · 120 trials)]
+        M[merge_dbs.py]
+        D[(phase_a.db)]
+        A[analyze_phase_a.py]
+        Z[9 configuraciones y gráficas]
+        R2 --> D2 --> M --> D --> A --> Z
+    end
+
+    ALB -. "revisa config.py y recibe phase_a_1.db" .-> XAB
+
+    classDef hecho fill:#bcd9f2,stroke:#0060aa,stroke-width:2px,color:#101820
+    classDef pendiente fill:#f7d9ae,stroke:#b35c00,stroke-width:2px,stroke-dasharray:5 3,color:#101820
+    class C,L,O,R1,D1 hecho
+    class R2,D2,M,D,A,Z pendiente
+    style ALB fill:#e3eef8,stroke:#0060aa,stroke-width:2px,color:#0a3d6b
+    style XAB fill:#fdf0dd,stroke:#b35c00,stroke-width:2px,color:#7a3f00
+```
 
 ## Entorno
 - Gymnasium versión: 1.3.0   Entorno: LunarLander-v3
