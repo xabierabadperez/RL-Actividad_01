@@ -33,15 +33,40 @@ calidad de los experimentos y análisis de los resultados.
 | 5 Contribuciones individuales | 1–2 párrafos por persona | Cada uno el suyo |
 
 ## Los 9 estudios
-Cada estudio: 30 trials de 500.000 pasos. Estado: ⬜ pendiente · 🟨 en curso · ✅ hecho
+Un **estudio** es una búsqueda de hiperparámetros con Optuna para **un algoritmo con un presupuesto de discretización**.
+Cada estudio hace 30 trials: cada trial entrena un agente 500.000 pasos con unos hiperparámetros distintos y lo evalúa
+en 50 episodios. Al terminar, Optuna se queda con la mejor combinación: esa es una de las **9 configuraciones** de la actividad.
+Los estudios son independientes entre sí, así que se pueden hacer a la vez.
+
+Estado: ⬜ pendiente · 🟨 en curso · ✅ hecho
 
 | Algoritmo | low (3 bins, 6.561 estados) | medium (5 bins, 390.625) | high (7 bins, 5.764.801) |
 |---|---|---|---|
-| SARSA | A.1 ⬜ | A.1 ⬜ | A.1 ⬜ |
+| SARSA | A.1 ✅ | A.1 ✅ | A.1 ✅ |
 | Expected SARSA | A.2 ⬜ | A.2 ⬜ | A.2 ⬜ |
-| Q-Learning | A.1 ⬜ | A.1 ⬜ | A.2 ⬜ |
+| Q-Learning | A.1 ✅ | A.1 ✅ | A.2 ⬜ |
 
-Bases de datos: `optuna/phase_a_1.db` (Alberto) y `optuna/phase_a_2.db` (Xabier).
+### A.1 Alberto: 5 estudios (150 trials) → `optuna/phase_a_1.db`
+- SARSA con los tres presupuestos y Q-Learning con low y medium.
+- Se lanzan con `python run_phase_a_1.py` (≈ 35 min).
+
+| Estudio | Mejor reward |
+|---|---|
+| sarsa_low | 9,99 |
+| sarsa_medium | 130,74 |
+| sarsa_high | 112,29 |
+| qlearning_low | 10,87 |
+| qlearning_medium | 148,55 |
+
+### A.2 Xabier: 4 estudios (120 trials) → `optuna/phase_a_2.db`
+- Expected SARSA con los tres presupuestos y Q-Learning con high.
+- Se lanzan con `python run_phase_a_2.py` (≈ 30 min): copia de `run_phase_a_1.py` con `OWNER = "2"` y su lista de estudios.
+
+- Hay 9 estudios y 2 personas, así que no se divide exacto: Alberto hace 5 y Xabier 4. Xabier lo compensa escribiendo
+  `merge_dbs.py` y `analyze_phase_a.py`.
+- Los dos usan los mismos archivos (`config.py`, `lunar_common.py`, `optuna_study.py`) con los mismos valores.
+  Solo cambia qué estudios lanza cada uno y en qué base de datos los guarda.
+- Después se intercambian las bases de datos y se fusionan en `phase_a.db` (9 estudios, 270 trials).
 
 ## Tareas
 ### Entre los dos
