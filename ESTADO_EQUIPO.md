@@ -43,8 +43,8 @@ Estado: ⬜ pendiente · 🟨 en curso · ✅ hecho
 | Algoritmo | low (3 bins, 6.561 estados) | medium (5 bins, 390.625) | high (7 bins, 5.764.801) |
 |---|---|---|---|
 | SARSA | A.1 ✅ | A.1 ✅ | A.1 ✅ |
-| Expected SARSA | A.2 ⬜ | A.2 ⬜ | A.2 ⬜ |
-| Q-Learning | A.1 ✅ | A.1 ✅ | A.2 ⬜ |
+| Expected SARSA | A.2 ✅ | A.2 ✅ | A.2 ✅ |
+| Q-Learning | A.1 ✅ | A.1 ✅ | A.2 ✅ |
 
 ### A.1 Alberto: 5 estudios (150 trials) → `optuna/phase_a_1.db`
 - SARSA con los tres presupuestos y Q-Learning con low y medium.
@@ -61,6 +61,13 @@ Estado: ⬜ pendiente · 🟨 en curso · ✅ hecho
 ### A.2 Xabier: 4 estudios (120 trials) → `optuna/phase_a_2.db`
 - Expected SARSA con los tres presupuestos y Q-Learning con high.
 - Se lanzan con `python run_phase_a_2.py` (≈ 30 min): copia de `run_phase_a_1.py` con `OWNER = "2"` y su lista de estudios.
+
+| Estudio | Mejor reward |
+|---|---|
+| esarsa_low | 18,13 |
+| esarsa_medium | 132,41 |
+| esarsa_high | 126,78 |
+| qlearning_high | 96,48 |
 
 - Hay 9 estudios y 2 personas, así que no se divide exacto: Alberto hace 5 y Xabier 4. Xabier lo compensa escribiendo
   `merge_dbs.py` y `analyze_phase_a.py`.
@@ -90,10 +97,10 @@ Estado: ⬜ pendiente · 🟨 en curso · ✅ hecho
 - [ ] Contribución individual
 
 ### A.2 Xabier
-- [ ] Instalar el entorno y comprobar con `python lunar_common.py`
-- [ ] `run_phase_a_2.py` (copia del de Alberto con `OWNER = "2"`)
-- [ ] Ejecutar sus 4 estudios (≈ 30 min)
-- [ ] `merge_dbs.py` (une las dos bases en `phase_a.db`)
+- [x] Instalar el entorno y comprobar con `python lunar_common.py`
+- [x] `run_phase_a_2.py` (copia del de Alberto con `OWNER = "2"`)
+- [x] Ejecutar sus 4 estudios (≈ 30 min)
+- [x] `merge_dbs.py` (une las dos bases en `phase_a.db`)
 - [ ] `analyze_phase_a.py` (tabla de las 9 configuraciones y gráficas)
 - [ ] Informe: 3b Hiperparámetros
 - [ ] Informe: 3c y 3d de sus estudios y tabla de las 9
@@ -126,6 +133,7 @@ Azul: Alberto · Ámbar: Xabier
 - Gymnasium versión: 1.3.0   Entorno: LunarLander-v3
 - Parámetros del entorno: continuous=False, gravity=-10.0, enable_wind=False
 - Pasos/segundo medidos: ≈ 36.000 (≈ 14 s por trial de 500.000 pasos, MacBook de Alberto)
+- Pasos/segundo medidos ≈ 16.000 (≈ 28 s por trial de 500.000 pasos, Windows de Xabier)
 
 ## Discretización
 Límites de observación (los mismos en los tres niveles), en orden x, y, vx, vy, ángulo, vel. angular, pata1, pata2:
