@@ -1,0 +1,13 @@
+{
+  "algo": "esarsa",
+  "budget": "high",
+  "n_bins": 7,
+  "reward": 126.77628767785725,
+  "params": {
+    "learning_rate": 0.21785916033930686,
+    "learning_rate_decay": 0.92,
+    "lr_episodes_decay": 100,
+    "discount_rate": 0.93,
+    "epsilon": 0.0
+  }
+}
