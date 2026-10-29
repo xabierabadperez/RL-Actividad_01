@@ -77,13 +77,13 @@ python run_phase_b.py train    # 27 entrenamientos (9 configuraciones x 3 semill
 python run_phase_b.py curves   # curvas de aprendizaje (media +/- desv. estándar) en results/figures/
 ```
 - `qtable_io.py`: guardar/cargar la tabla Q con sus metadatos (algoritmo, presupuesto, semilla, hiperparámetros).
-- `results/qtables/*.json`: metadatos de las 27 tablas (sí se versionan, pesan poco).
-- `results/qtables/*.npy`: las tablas Q en sí. **No se versionan** (los de presupuesto `high` pesan ~176 MB
-  cada una, por encima del límite de 100 MB de GitHub). Están comprimidas en `results/qtables.zip` (~4.6 MB,
-  porque la mayoría de estados nunca se visitan y quedan en 0).
+- `results/qtables/`: las 27 tablas Q (`.npy`) con sus metadatos (`.json`). **La carpeta no se versiona**
+  (los `.npy` de presupuesto `high` pesan ~176 MB cada uno, por encima del límite de 100 MB de GitHub).
+  Está comprimida entera en `results/qtables.zip` (~4.6 MB, porque la mayoría de estados nunca se visitan
+  y quedan en 0).
 
-  **Tras clonar el repo, descomprime ese archivo antes de usar las tablas Q** (por ejemplo, para la evaluación
-  de Mauro):
+  **Tras clonar el repo, descomprime ese archivo para regenerar la carpeta** (recrea
+  `Actividad_1/results/qtables/` con los 27 `.npy` + `.json`, el zip ya trae esa estructura dentro):
   ```bash
   cd Actividad_1/results
   unzip qtables.zip
