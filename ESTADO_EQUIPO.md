@@ -3,6 +3,7 @@
 
 ## Equipo
 - Fase A: Alberto (A.1), Xabier (A.2)
+- Fase B: Katherine (B.1), Mauro (B.2)
 
 ## Qué pide la actividad en la Fase A
 Entrega: 3/11/2026 (extensión 9/11) · Valor total de la actividad: 15 %.
@@ -157,3 +158,102 @@ Justificación:
 
 ## 9 configuraciones elegidas
 (pegar tabla de results/best_configs.md cuando estén los 9 estudios)
+
+## Qué pide la actividad en la Fase B
+La Fase B vale un 5 %: rigor de los experimentos con múltiples semillas, interpretación de las curvas de aprendizaje,
+análisis comparativo del rendimiento, la estabilidad y la convergencia, así como las conclusiones obtenidas.
+
+| Requisito del enunciado (sección 3, Fase B) | Cómo lo cumplimos | Quién |
+|---|---|---|
+| 1. Mecanismo básico para guardar/cargar la tabla Q | `qtable_io.py` (`save_qtable`/`load_qtable`, guarda `.npy` + `.json` con metadatos) | Katherine |
+| 2. Entrenamientos largos de las 9 configuraciones, 3 semillas por configuración (27 en total), mismo presupuesto máximo de pasos, registrados en TensorBoard | `run_phase_b.py train` (reutiliza `lunar_common.make_env`/`ALGO_CLASSES`; TensorBoard activado, a diferencia de la Fase A) | Katherine |
+| 3. Guardar cada tabla Q con su algoritmo y discretización; evaluarla 50 episodios y elegir la mejor por presupuesto de discretización (3 políticas finales) | Evaluación de las 27 tablas Q guardadas (`qtable_io.load_qtable` + `deustorl.common.evaluate_policy`) | Mauro |
+| 4. Inspección visual del comportamiento de las 3 políticas finales | Ejecución de las políticas finales con render del entorno | Mauro |
+| 5. Analizar velocidad de aprendizaje, estabilidad y convergencia | A partir de las curvas de `run_phase_b.py curves` (media ± desviación estándar entre semillas) | Katherine |
+| 5. Analizar rendimiento final e influencia de la discretización | A partir de las tablas comparativas de evaluación | Mauro |
+
+### Qué se entrega de la Fase B (sección 6 del enunciado)
+- [x] Registros de TensorBoard de los entrenamientos largos (`tensorboard-logs/phase_b/`, versionado en git)
+- [ ] Tres políticas finales tras los entrenamientos largos (`results/qtables/`, una por presupuesto de discretización)
+- [ ] Informe en PDF con las secciones de la Fase B:
+
+| Sección del informe | Contenido | Quién |
+|---|---|---|
+| 4a Código de serialización | Funciones Python para guardar y cargar la tabla Q | Katherine |
+| 4b Curvas de aprendizaje | Gráficas de TensorBoard (media y dispersión de semillas) y su interpretación | Katherine |
+| 4c Políticas finales | Tabla comparativa de evaluación y descripción del comportamiento observado | Mauro |
+| 4d Análisis comparativo | Velocidad de aprendizaje y estabilidad/convergencia (Katherine); rendimiento final e influencia de la discretización (Mauro) | Katherine y Mauro |
+| 5 Contribuciones individuales | 1–2 párrafos por persona | Cada uno el suyo |
+
+## Los 27 entrenamientos
+Un **entrenamiento largo** es una ejecución completa de `learn()` para una de las 9 configuraciones seleccionadas en
+la Fase A, con una semilla concreta (`PHASE_B_SEEDS` en `config.py`, por defecto `[0, 1, 2]`). Se hacen 3 semillas por
+configuración (27 en total) para medir la estabilidad entre ejecuciones independientes, todas con el mismo presupuesto
+máximo de pasos (`PHASE_B_TRAIN_STEPS`). Cada entrenamiento guarda su tabla Q (`qtable_io.py`) y queda registrado en
+TensorBoard bajo `tensorboard-logs/phase_b/<algo>_<budget>_seed<semilla>_<fecha>` (carpeta versionada en git, para no tener que repetir los 27 entrenamientos).
+
+Estado: ⬜ pendiente · 🟨 en curso · ✅ hecho
+
+| Algoritmo | low (3 semillas) | medium (3 semillas) | high (3 semillas) |
+|---|---|---|---|
+| SARSA | ✅ | ✅ | ✅ |
+| Expected SARSA | ✅ | ✅ | ✅ |
+| Q-Learning | ✅ | ✅ | ✅ |
+
+Los 27 entrenamientos se ejecutaron con `PHASE_B_TRAIN_STEPS = 2_000_000` y `PHASE_B_SEEDS = [0, 1, 2]`. Tablas Q en
+`results/qtables/` (27 archivos), logs en `tensorboard-logs/phase_b/` y curvas en `results/figures/` (9 PNG, una por configuración).
+
+### B.1 Katherine: entrenamientos, guardado y curvas
+- Implementa y ejecuta `run_phase_b.py train` (27 entrenamientos) y `run_phase_b.py curves`. ✅ Completado.
+- `qtable_io.py` es el formato común: Mauro carga desde ahí las tablas que ella guarda.
+
+### B.2 Mauro: evaluación y políticas finales
+- Carga las tablas Q guardadas por Katherine con `qtable_io.load_qtable` y las evalúa (50 episodios cada una).
+- Mientras Katherine no tenga las 27 tablas finales, puede desarrollar su script de evaluación con una tabla
+  provisional (por ejemplo, una guardada en una prueba pequeña).
+
+## Tareas Fase B
+### Entre los dos
+- [x] Acordar el formato de los archivos de tabla Q y sus metadatos (algoritmo, discretización, semilla, configuración) → `qtable_io.py`
+- [x] `PHASE_B_TRAIN_STEPS` en `config.py`: 2.000.000 de pasos, usado en los 27 entrenamientos reales
+- [x] `PHASE_B_SEEDS` en `config.py`: `[0, 1, 2]`, usado en los 27 entrenamientos reales
+- [ ] Revisión cruzada del código y del texto
+
+### B.1 Katherine
+- [x] `qtable_io.py` (probado)
+- [x] `run_phase_b.py train` (probado con una configuración y pocos pasos)
+- [x] `run_phase_b.py curves` (probado)
+- [x] Ejecutar los 27 entrenamientos reales (`results/qtables/`, `tensorboard-logs/phase_b/`, `results/figures/`)
+- [ ] Informe: 4a Código de serialización
+- [ ] Informe: 4b Curvas de aprendizaje
+- [ ] Análisis: velocidad de aprendizaje, estabilidad y convergencia
+- [ ] Contribución individual
+
+### B.2 Mauro
+- [ ] Script de evaluación de las tablas Q guardadas
+- [ ] Evaluar las 27 tablas Q (50 episodios cada una)
+- [ ] Seleccionar las 3 políticas finales (una por presupuesto de discretización)
+- [ ] Inspección visual de las 3 políticas finales
+- [ ] Tablas comparativas de evaluación
+- [ ] Informe: 4c Políticas finales
+- [ ] Informe: 4d Análisis comparativo (rendimiento final e influencia de la discretización)
+- [ ] Contribución individual
+
+## Cómo se conectan los archivos de la Fase B
+```mermaid
+flowchart LR
+    BC[results/best_*.json<br/>Fase A] --> RB[run_phase_b.py train<br/>Katherine]
+    RB --> QIO[qtable_io.py<br/>Katherine]
+    QIO --> QT[(results/qtables/<br/>27 tablas Q)]
+    RB --> LG[(tensorboard-logs/phase_b/<br/>TensorBoard)]
+    LG --> CV[run_phase_b.py curves<br/>Katherine]
+    CV --> FG[results/figures/<br/>curvas de aprendizaje]
+    QT --> EV[evaluación<br/>Mauro]
+    EV --> POL[3 políticas finales]
+
+    classDef katherine fill:#e3f6e3,stroke:#1f7a1f,color:#17202c
+    classDef mauro fill:#f3e3f6,stroke:#7a1f7a,color:#17202c
+    class RB,QIO,QT,LG,CV,FG katherine
+    class EV,POL mauro
+```
+Verde: Katherine · Lila: Mauro

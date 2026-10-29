@@ -1,4 +1,6 @@
 __pycache__/
 *.pyc
 logs/
+qtables_csv/
+Actividad_1/results/qtables/
 .DS_Store

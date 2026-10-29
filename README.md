@@ -69,3 +69,25 @@ python optuna_study.py --algo sarsa --budget low --owner 1
 ## Resultados
 - `optuna/phase_a_1.db`: un estudio por algoritmo y presupuesto (30 trials).
 - `results/best_<algoritmo>_<presupuesto>.json`: la mejor configuración de cada estudio.
+
+## Fase B: entrenamientos largos (Katherine)
+```bash
+cd Actividad_1
+python run_phase_b.py train    # 27 entrenamientos (9 configuraciones x 3 semillas)
+python run_phase_b.py curves   # curvas de aprendizaje (media +/- desv. estándar) en results/figures/
+```
+- `qtable_io.py`: guardar/cargar la tabla Q con sus metadatos (algoritmo, presupuesto, semilla, hiperparámetros).
+- `results/qtables/*.json`: metadatos de las 27 tablas (sí se versionan, pesan poco).
+- `results/qtables/*.npy`: las tablas Q en sí. **No se versionan** (los de presupuesto `high` pesan ~176 MB
+  cada una, por encima del límite de 100 MB de GitHub). Están comprimidas en `results/qtables.zip` (~4.6 MB,
+  porque la mayoría de estados nunca se visitan y quedan en 0).
+
+  **Tras clonar el repo, descomprime ese archivo antes de usar las tablas Q** (por ejemplo, para la evaluación
+  de Mauro):
+  ```bash
+  cd Actividad_1/results
+  unzip qtables.zip
+  ```
+  Esto recrea `results/qtables/*.npy` junto a los `.json` ya versionados.
+- `tensorboard-logs/phase_b/`: registros de TensorBoard de los 27 entrenamientos (sí se versionan; se llama así,
+  en vez de `logs/`, para no caer en el `.gitignore`).

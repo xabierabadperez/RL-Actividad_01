@@ -1,6 +1,5 @@
 """
-Parámetros compartidos de la Actividad 1 (LunaLander).
-A.1 (ALberto) A.2 (Xabier)
+Parámetros compartidos.
 
 """
 import sys
@@ -48,6 +47,16 @@ SEARCH_SPACE = {
 # Carpetas de salida
 OPTUNA_DIR = Path(__file__).resolve().parent / "optuna"
 RESULTS_DIR = Path(__file__).resolve().parent / "results"
+
+# --- Fase B: entrenamientos largos ---
+# Mismo presupuesto de pasos para las 9 configuraciones.
+# (más alto que TRAIN_STEPS de la Fase A porque aquí se busca ver la convergencia).
+PHASE_B_TRAIN_STEPS = 2_000_000
+PHASE_B_SEEDS = [0, 1, 2]
+PHASE_B_EVAL_EPISODES = 50  # usado en la evaluación de Mauro
+QTABLE_DIR = RESULTS_DIR / "qtables"
+# "tensorboard-logs" versionado en git
+PHASE_B_LOG_DIR = Path(__file__).resolve().parent / "tensorboard-logs" / "phase_b"
 
 def study_name(algo, budget):
     return f"{algo}_{budget}"
