@@ -230,10 +230,10 @@ Los 27 entrenamientos se ejecutaron con `PHASE_B_TRAIN_STEPS = 2_000_000` y `PHA
 - [ ] Contribución individual
 
 ### B.2 Mauro
-- [ ] Script de evaluación de las tablas Q guardadas
-- [ ] Evaluar las 27 tablas Q (50 episodios cada una)
-- [ ] Seleccionar las 3 políticas finales (una por presupuesto de discretización)
-- [ ] Inspección visual de las 3 políticas finales
+- [x] Script de evaluación de las tablas Q guardadas
+- [x] Evaluar las 27 tablas Q (50 episodios cada una)
+- [x] Seleccionar las 3 políticas finales (una por presupuesto de discretización)
+- [x] Inspección visual de las 3 políticas finales
 - [ ] Tablas comparativas de evaluación
 - [ ] Informe: 4c Políticas finales
 - [ ] Informe: 4d Análisis comparativo (rendimiento final e influencia de la discretización)
