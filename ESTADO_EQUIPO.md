@@ -20,7 +20,7 @@ calidad de los experimentos y análisis de los resultados.
 
 
 ### Qué se entrega de la Fase A (sección 6 del enunciado)
-- [ ] Base de datos de Optuna: `optuna/phase_a.db` (fusión de las dos; la hace `merge_dbs.py`)
+- [x] Base de datos de Optuna: `optuna/phase_a.db` (fusión de las dos; la hace `merge_dbs.py`)
 - [ ] Scripts de Python utilizados
 - [ ] Informe en PDF con las secciones de la Fase A:
 
@@ -102,7 +102,7 @@ Estado: ⬜ pendiente · 🟨 en curso · ✅ hecho
 - [x] `run_phase_a_2.py` (copia del de Alberto con `OWNER = "2"`)
 - [x] Ejecutar sus 4 estudios (≈ 30 min)
 - [x] `merge_dbs.py` (une las dos bases en `phase_a.db`)
-- [ ] `analyze_phase_a.py` (tabla de las 9 configuraciones y gráficas)
+- [x] `analyze_phase_a.py` (tabla de las 9 configuraciones y gráficas)
 - [ ] Informe: 3b Hiperparámetros
 - [ ] Informe: 3c y 3d de sus estudios y tabla de las 9
 - [ ] Análisis: Expected SARSA y comparación global
@@ -157,7 +157,17 @@ Justificación:
 - Hiperparámetros: learning rate, decaimiento del lr, episodios de decaimiento, factor de descuento y epsilon (rangos en `SEARCH_SPACE` de `config.py`).
 
 ## 9 configuraciones elegidas
-(pegar tabla de results/best_configs.md cuando estén los 9 estudios)
+| Algoritmo | Presupuesto | n_bins | Estados | Mejor reward | Pasos eval. | learning_rate | lr_decay | lr_episodes_decay | discount_rate | epsilon |
+|---|---|---|---|---|---|---|---|---|---|---|
+| SARSA | low | 3 | 6.561 | 9.99 | 165 | 0.0328 | 1.00 | 500 | 0.93 | 0.05 |
+| SARSA | medium | 5 | 390.625 | 130.74 | 304 | 0.1023 | 0.88 | 1000 | 0.95 | 0.00 |
+| SARSA | high | 7 | 5.764.801 | 112.29 | 379 | 0.4640 | 1.00 | 1000 | 0.97 | 0.00 |
+| Expected SARSA | low | 3 | 6.561 | 18.13 | 166 | 0.1164 | 0.88 | 100 | 0.96 | 0.05 |
+| Expected SARSA | medium | 5 | 390.625 | 132.41 | 307 | 0.0725 | 0.82 | 500 | 0.93 | 0.00 |
+| Expected SARSA | high | 7 | 5.764.801 | 126.78 | 365 | 0.2179 | 0.92 | 100 | 0.93 | 0.00 |
+| Q-Learning | low | 3 | 6.561 | 10.87 | 161 | 0.2053 | 0.94 | 100 | 0.95 | 0.15 |
+| Q-Learning | medium | 5 | 390.625 | 148.55 | 317 | 0.0805 | 0.98 | 100 | 0.96 | 0.00 |
+| Q-Learning | high | 7 | 5.764.801 | 96.48 | 375 | 0.4555 | 0.92 | 100 | 0.95 | 0.00 |
 
 ## Qué pide la actividad en la Fase B
 La Fase B vale un 5 %: rigor de los experimentos con múltiples semillas, interpretación de las curvas de aprendizaje,
