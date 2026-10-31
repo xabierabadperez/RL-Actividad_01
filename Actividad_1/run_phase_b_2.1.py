@@ -99,5 +99,5 @@ def visualize_final_policies(policies_dir=None, n_episodes=2, render=False):
 
 if __name__ == "__main__":
     RENDER = True 
-    EPISODES = 2 
+    EPISODES = 10 
     visualize_final_policies(n_episodes=EPISODES, render=RENDER)
