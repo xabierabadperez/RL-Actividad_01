@@ -20,7 +20,7 @@ calidad de los experimentos y análisis de los resultados.
 
 
 ### Qué se entrega de la Fase A (sección 6 del enunciado)
-- [x] Base de datos de Optuna: `optuna/phase_a.db` (fusión de las dos; la hace `merge_dbs.py`)
+- [x] Base de datos de Optuna: `optuna/phase_a_all.db` (fusión de las dos; la hace `merge_dbs.py`)
 - [ ] Scripts de Python utilizados
 - [ ] Informe en PDF con las secciones de la Fase A:
 
@@ -29,8 +29,8 @@ calidad de los experimentos y análisis de los resultados.
 | 2 Entorno seleccionado | Descripción y justificación de LunarLander | Alberto |
 | 3a Tamaños de discretización | Los tres niveles, tamaño de los espacios y justificación | Alberto |
 | 3b Hiperparámetros | Tabla de hiperparámetros explorados y rangos | Xabier |
-| 3c Resultados de Optuna | 3–5 gráficas más relevantes con su interpretación | Alberto y Xabier (cada uno las de sus estudios) |
-| 3d Mejores configuraciones | Tabla con las nueve configuraciones | Xabier (tabla de las 9) y Alberto (sus 5 filas) |
+| 3c Resultados de Optuna | 3–5 gráficas más relevantes con su interpretación | Alberto |
+| 3d Mejores configuraciones | Tabla con las nueve configuraciones | Xabier |
 | 5 Contribuciones individuales | 1–2 párrafos por persona | Cada uno el suyo |
 
 ## Los 9 estudios
@@ -74,13 +74,13 @@ Estado: ⬜ pendiente · 🟨 en curso · ✅ hecho
   `merge_dbs.py` y `analyze_phase_a.py`.
 - Los dos usan los mismos archivos (`config.py`, `lunar_common.py`, `optuna_study.py`) con los mismos valores.
   Solo cambia qué estudios lanza cada uno y en qué base de datos los guarda.
-- Después se intercambian las bases de datos y se fusionan en `phase_a.db` (9 estudios, 270 trials).
+- Después se intercambian las bases de datos y se fusionan en `phase_a_all.db` (9 estudios, 270 trials).
 
 ## Tareas
 ### Entre los dos
-- [ ] Revisar y aceptar `config.py` (bins, límites, rangos, pasos, semilla)
+- [x] Revisar y aceptar `config.py` (bins, límites, rangos, pasos, semilla)
 - [x] Repartir los 9 estudios
-- [ ] Decidir si se amplía el rango de `learning_rate` (en pruebas llegó a 0,46 de un máximo de 0,5)
+- [x] Decidir si se amplía el rango de `learning_rate` (en pruebas llegó a 0,46 de un máximo de 0,5) --> DECISIÓN: No se amplía
 - [ ] Comprobar los límites de observación con datos medidos (percentiles 1 y 99)
 - [ ] Intercambiar las bases de datos y fusionar las ramas
 - [ ] Revisión cruzada del código y del texto
@@ -93,7 +93,7 @@ Estado: ⬜ pendiente · 🟨 en curso · ✅ hecho
 - [x] `requirements.txt`, `.gitignore`, `README.md`, este archivo (en curso)
 - [x] Ejecutar sus 5 estudios (≈ 35 min)
 - [ ] Informe: 2 Entorno y 3a Discretización
-- [ ] Informe: 3c y 3d de sus estudios
+- [ ] Informe: 3c
 - [ ] Análisis: discretización en SARSA y Q-Learning
 - [ ] Contribución individual
 
@@ -101,10 +101,11 @@ Estado: ⬜ pendiente · 🟨 en curso · ✅ hecho
 - [x] Instalar el entorno y comprobar con `python lunar_common.py`
 - [x] `run_phase_a_2.py` (copia del de Alberto con `OWNER = "2"`)
 - [x] Ejecutar sus 4 estudios (≈ 30 min)
-- [x] `merge_dbs.py` (une las dos bases en `phase_a.db`)
+- [x] `merge_dbs.py` (une las dos bases en `phase_a_all.db`)
 - [x] `analyze_phase_a.py` (tabla de las 9 configuraciones y gráficas)
-- [ ] Informe: 3b Hiperparámetros
-- [ ] Informe: 3c y 3d de sus estudios y tabla de las 9
+- [x] Informe: 3b Hiperparámetros
+- [x] Informe: tabla de las 9 mejores configuraciones
+- [] Informe: 3d. Mejores configuraciones 
 - [ ] Análisis: Expected SARSA y comparación global
 - [ ] Contribución individual
 
@@ -118,7 +119,7 @@ flowchart LR
     R2 --> D2[(phase_a_2.db)]
     D1 --> M[merge_dbs.py<br/>Xabier]
     D2 --> M
-    M --> D[(phase_a.db)]
+    M --> D[(phase_a_all.db)]
     D --> A[analyze_phase_a.py<br/>Xabier]
     A --> Z[results: 9 configuraciones y gráficas]
 
