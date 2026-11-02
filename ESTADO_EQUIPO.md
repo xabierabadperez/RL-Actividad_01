@@ -92,10 +92,10 @@ Estado: ⬜ pendiente · 🟨 en curso · ✅ hecho
 - [x] `run_phase_a_1.py`
 - [x] `requirements.txt`, `.gitignore`, `README.md`, este archivo (en curso)
 - [x] Ejecutar sus 5 estudios (≈ 35 min)
-- [ ] Informe: 2 Entorno y 3a Discretización
-- [ ] Informe: 3c
-- [ ] Análisis: discretización en SARSA y Q-Learning
-- [ ] Contribución individual
+- [x] Informe: 2 Entorno y 3a Discretización
+- [x] Informe: 3c
+- [x] Análisis: discretización en SARSA y Q-Learning
+- [x] Contribución individual
 
 ### A.2 Xabier
 - [x] Instalar el entorno y comprobar con `python lunar_common.py`
