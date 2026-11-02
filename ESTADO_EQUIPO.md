@@ -105,9 +105,9 @@ Estado: ⬜ pendiente · 🟨 en curso · ✅ hecho
 - [x] `analyze_phase_a.py` (tabla de las 9 configuraciones y gráficas)
 - [x] Informe: 3b Hiperparámetros
 - [x] Informe: tabla de las 9 mejores configuraciones
-- [] Informe: 3d. Mejores configuraciones 
-- [ ] Análisis: Expected SARSA y comparación global
-- [ ] Contribución individual
+- [x] Informe: 3d. Mejores configuraciones 
+- [x] Análisis: Expected SARSA y comparación global
+- [x] Contribución individual
 
 ## Cómo se conectan los archivos
 ```mermaid
