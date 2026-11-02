@@ -1,5 +1,7 @@
 # Actividad 1 – RL: SARSA, Expected SARSA y Q-Learning en LunarLander
 
+**Repositorio en GitHub:** [RL-Actividad_01](https://github.com/xabierabadperez/RL-Actividad_01).
+
 **Fase A:** optimización de hiperparámetros con Optuna para 3 algoritmos × 3 presupuestos de
 discretización, sobre `LunarLander-v3` (Gymnasium, Box2D), usando los `DiscretizationWrappers` de `deustorl/`.
 
